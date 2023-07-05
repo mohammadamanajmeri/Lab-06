@@ -65,10 +65,14 @@ def installer_ok(installer_data, expected_sha256):
         bool: True if SHA-256 of VLC installer matches expected SHA-256. False if not.
     """    
     # TODO: Step 3
-   
+    file_url = 'http://download.videolan.org/pub/videolan/vlc/3.0.17.4/win64/'
+    resp_msg = requests.get(file_url)
+    if resp_msg.status_code == requests.code.ok:
+      installer_data = resp_msg.content
+      expected_sha256 = hashlib.sha256(installer_data).hexdigest()
+      print(expected_sha256)
 
     # Hint: See example code in lab instructions entitled "Computing the Hash Value of a Response Message Body"
-    
     return
 
 def save_installer(installer_data):
@@ -81,6 +85,12 @@ def save_installer(installer_data):
         str: Full path of the saved VLC installer file
     """
     # TODO: Step 4
+    file_url = 'http://download.videolan.org/pub/videolan/vlc/3.0.17.4/win64/'
+    resp_msg = requests.get(file_url)
+    if resp_msg.status_code == requests.code.ok:
+      installer_data = resp_msg.content
+      with open(r'C:\Users\Administrator\Desktop\Scripting Lab 5', 'wb') as file:
+          file.write(installer_data)
     # Hint: See example code in lab instructions entitled "Downloading a Binary File"
     return
 
