@@ -1,5 +1,7 @@
 import hashlib
 import requests
+import subprocess
+import os
 def main():
 
     # Get the expected SHA-256 hash value of the VLC installer
@@ -101,6 +103,8 @@ def run_installer(installer_path):
         installer_path (str): Full path of the VLC installer file
     """    
     # TODO: Step 5
+    installer_path = 'http://download.videolan.org/pub/videolan/vlc/3.0.17.4/win64/' 
+    subprocess.run([installer_path, '/L=1033', '/S'])
     # Hint: See example code in lab instructions entitled "Running the VLC Installer"
     return
     
@@ -112,6 +116,7 @@ def delete_installer(installer_path):
     Args:
         installer_path (str): Full path of the VLC installer file
     """
+    os.remove(installer_path)
     return
 
 if __name__ == '__main__':
